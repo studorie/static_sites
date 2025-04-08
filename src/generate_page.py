@@ -27,12 +27,10 @@ def generate_page(from_path, template_path, dest_path, basepath):
     # Replace the placeholders in the template
     page_content = template_content.replace("{{ Title }}", title).replace("{{ Content }}", content_html)
     
-    # Replace href="/index.css" with the correct basepath
-    page_content = page_content.replace('href="/index.css', f'href="{basepath}index.css')
-
-    # Replace src="/images/... with the correct basepath for images
-    page_content = page_content.replace('src="/images/', f'src="{basepath}images/')
-
+    # Replace href and src paths with basepath
+    page_content = page_content.replace('href="/', f'href="{basepath}')
+    page_content = page_content.replace('src="/', f'src="{basepath}')
+    
     # Ensure the destination directory exists
     os.makedirs(os.path.dirname(dest_path), exist_ok=True)
     

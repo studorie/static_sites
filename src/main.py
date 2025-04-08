@@ -52,4 +52,4 @@ def main():
     generate_pages_recursive('content', 'template.html', 'dir', basepath)  # Using 'dir' as the output folder
 
 if __name__ == "__main__":
-    main()
+    main() 
