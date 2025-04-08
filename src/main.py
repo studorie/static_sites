@@ -1,18 +1,21 @@
 import sys
 import os
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import shutil
 from generate_page import generate_page
 from generate_pages_recursive import generate_pages_recursive
 
 def copy_static_files():
     # Clear the public directory first
-    public_dir = 'public'  # Ensure it's in the right location
+    public_dir = 'dir'  # Ensure it's in the right location
     if os.path.exists(public_dir):
         shutil.rmtree(public_dir)
         print("Deleted existing 'public' directory.")
 
     # Copy static files from static to public
-    shutil.copytree('static', 'public')  # Copy from 'static' to 'public'
+    shutil.copytree('static', 'dir')  # Copy from 'static' to 'public'
     print("Static files copied to 'public'.")
 
 def generate_pages_recursive(dir_path_content, template_path, dest_dir_path, basepath):
