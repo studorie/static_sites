@@ -8,20 +8,20 @@ from generate_page import generate_page
 from generate_pages_recursive import generate_pages_recursive
 
 def copy_static_files():
-    # Clear the public directory first
-    public_dir = 'dir'  # Ensure it's in the right location
-    if os.path.exists(public_dir):
-        shutil.rmtree(public_dir)
-        print("Deleted existing 'public' directory.")
+    # Clear the 'dir' directory first
+    dir_path = 'dir'  # Using 'dir' as per your request
+    if os.path.exists(dir_path):
+        shutil.rmtree(dir_path)
+        print("Deleted existing 'dir' directory.")
 
-    # Copy static files from static to public
-    shutil.copytree('static', 'dir')  # Copy from 'static' to 'public'
-    print("Static files copied to 'public'.")
+    # Copy static files from static to 'dir'
+    shutil.copytree('static', dir_path)  # Copy from 'static' to 'dir'
+    print("Static files copied to 'dir'.")
 
 def generate_pages_recursive(dir_path_content, template_path, dest_dir_path, basepath):
     """
     Crawl the content directory and generate HTML pages for all markdown files.
-    Preserve the directory structure when writing to the public directory.
+    Preserve the directory structure when writing to the 'dir' directory.
     """
     for root, dirs, files in os.walk(dir_path_content):
         for file in files:
@@ -41,14 +41,15 @@ def generate_pages_recursive(dir_path_content, template_path, dest_dir_path, bas
                 print(f"Generated {dest_path} from {md_path}")
 
 def main():
-    basepath = sys.argv[1] if len(sys.argv) > 1 else '/'  # Default to '/' if no argument is provided
+    # Get basepath from command-line arguments or default to '/'
+    basepath = sys.argv[1] if len(sys.argv) > 1 else '/'  
     print(f"Using basepath: {basepath}")
 
-    # Step 1: Copy static files
+    # Step 1: Copy static files to 'dir'
     copy_static_files()
 
     # Step 2: Generate pages recursively for all markdown files in content directory
-    generate_pages_recursive('content', 'template.html', 'docs', basepath)  # Build to 'docs' directory for GitHub Pages
+    generate_pages_recursive('content', 'template.html', 'dir', basepath)  # Using 'dir' as the output folder
 
 if __name__ == "__main__":
     main()
