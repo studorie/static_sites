@@ -8,20 +8,20 @@ from generate_page import generate_page
 from generate_pages_recursive import generate_pages_recursive
 
 def copy_static_files():
-    # Clear the 'dir' directory first
-    dir_path = 'dir'  # Using 'dir' as per your request
-    if os.path.exists(dir_path):
-        shutil.rmtree(dir_path)
-        print("Deleted existing 'dir' directory.")
+    # Clear the 'docs' directory first (instead of 'dir')
+    docs_dir = 'docs'  # Using 'docs' as per your request for GitHub Pages
+    if os.path.exists(docs_dir):
+        shutil.rmtree(docs_dir)
+        print("Deleted existing 'docs' directory.")
 
-    # Copy static files from static to 'dir'
-    shutil.copytree('static', dir_path)  # Copy from 'static' to 'dir'
-    print("Static files copied to 'dir'.")
+    # Copy static files from static to 'docs'
+    shutil.copytree('static', docs_dir)  # Copy from 'static' to 'docs'
+    print("Static files copied to 'docs'.")
 
 def generate_pages_recursive(dir_path_content, template_path, dest_dir_path, basepath):
     """
     Crawl the content directory and generate HTML pages for all markdown files.
-    Preserve the directory structure when writing to the 'dir' directory.
+    Preserve the directory structure when writing to the 'docs' directory.
     """
     for root, dirs, files in os.walk(dir_path_content):
         for file in files:
@@ -45,11 +45,11 @@ def main():
     basepath = sys.argv[1] if len(sys.argv) > 1 else '/'  
     print(f"Using basepath: {basepath}")
 
-    # Step 1: Copy static files to 'dir'
+    # Step 1: Copy static files to 'docs'
     copy_static_files()
 
     # Step 2: Generate pages recursively for all markdown files in content directory
-    generate_pages_recursive('content', 'template.html', 'dir', basepath)  # Using 'dir' as the output folder
+    generate_pages_recursive('content', 'template.html', 'docs', basepath)  # Using 'docs' as the output folder
 
 if __name__ == "__main__":
     main() 
